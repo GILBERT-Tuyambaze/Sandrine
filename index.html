@@ -193,8 +193,8 @@ noBtn.addEventListener("mouseover", () => {
 
     noBtn.style.transform = "rotate(" + (Math.random() * 20 - 10) + "deg)";
 
-    if (escapeCount > 1 && escapeCount < 31) {
-        noBtn.textContent = noTexts[Math.floor(Math.random() * noTexts.length)];
+    if (escapeCount <= 30) {
+        noBtn.textContent = noTexts[escapeCount];
     }
 
     if (escapeCount >= 31) {
