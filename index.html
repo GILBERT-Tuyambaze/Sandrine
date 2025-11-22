@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sandrine, do you love me?</title>
+<style>
+body { font-family: Arial, sans-serif; text-align:center; overflow:hidden; background:#ffe6f2; margin:0; padding:0; height:100vh; cursor:none; }
+.typewriter { font-size:40px; margin-top:80px; display:inline-block; border-right:3px solid #ff4da6; white-space:nowrap; overflow:hidden; animation:typing 3s steps(30) forwards, blink 0.7s infinite; }
+@keyframes typing { from { width:0;} to { width:100%;} }
+@keyframes blink { 50% { border-color:transparent; } }
+
+#yesBtn, #noBtn, #musicBtn { padding:15px 25px; font-size:22px; margin:10px; cursor:pointer; border:none; border-radius:10px; transition:all 0.3s ease-in-out; }
+#yesBtn { background:#ff4da6; color:white; animation:pulse 1.5s infinite; }
+#noBtn { background:#999; color:white; position:absolute; }
+#musicBtn { background:#ff80bf; color:white; }
+@keyframes pulse { 0% { transform:scale(1);} 50% { transform:scale(1.1);} 100% { transform:scale(1);} }
+
+.gilbert { font-size:40px; margin-top:20px; font-weight:bold; text-shadow:0 0 10px #ff4da6,0 0 20px #ff4da6,0 0 40px #ff80bf,0 0 80px #ffb3d9; animation:glow 2s infinite alternate; }
+@keyframes glow { from { text-shadow:0 0 5px #ff4da6,0 0 10px #ff4da6;} to { text-shadow:0 0 20px #ff4da6,0 0 40px #ff80bf; } }
+
+.heart { position:fixed; bottom:-20px; font-size:30px; animation:floatUp 5s ease-in infinite; color:#ff6699; opacity:0.8; pointer-events:none; }
+@keyframes floatUp { 0% { transform:translateY(0) rotate(0deg); opacity:0.7;} 50% {opacity:1;} 100% { transform:translateY(-120vh) rotate(360deg); opacity:0;} }
+
+.big-heart { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(0); font-size:200px; opacity:0; animation:popHeart 1.5s forwards; }
+@keyframes popHeart { 0% { transform:translate(-50%,-50%) scale(0); opacity:0;} 50% { transform:translate(-50%,-50%) scale(1.2); opacity:1;} 100% { transform:translate(-50%,-50%) scale(1); opacity:1;} }
+
+@keyframes beatingHeart { 0% { transform:scale(1); } 50% { transform:scale(1.2); } 100% { transform:scale(1); } }
+@keyframes pulseGlow { 0% { text-shadow:0 0 15px #ff99cc;} 100% { text-shadow:0 0 40px #ff4da6;} }
+@keyframes sparkleFade { 0% {opacity:0; transform:scale(0.5) rotate(0deg);} 50% {opacity:1; transform:scale(1.2) rotate(180deg);} 100% {opacity:0; transform:scale(0.5) rotate(360deg);} }
+@keyframes fadeIn { from { opacity:0;} to {opacity:1;} }
+.cursor-heart { position:fixed; font-size:25px; pointer-events:none; color:#ff3366; opacity:0.8; animation:floatUp 3s ease-in forwards; }
+</style>
+</head>
+<body>
+
+<h1 class="typewriter">Sandrine, do you love me?</h1>
+
+<button id="musicBtn">Play Romantic Song 🎵</button>
+<button id="yesBtn">Yes ❤️</button>
+<button id="noBtn">No 😢</button>
+
+<script>
+let escapeCount = 0;
+const noBtn = document.getElementById("noBtn");
+const noTexts = [
+  "Really? 😳","Come on… 😅","Try again 🤭","Don't lie 😌","Hmm… 🤨",
+  "Not this time 😏","Oops! 😬","You can't! 😜","Haha, nice try 😝","Again? 🤔",
+  "Nope! 🙃","Keep trying 😎","Almost… 😇","Not yet 😶","Think again 🤪",
+  "Wrong choice 😣","Not allowed 😆","Try harder 😅","Haha 😂","Impossible 😱",
+  "Fail 😬","Nice try 😏","You wish 😌","LOL 😝","Come back later 😛",
+  "No way 🤭","Not happening 😜","Hahaha 😆","Keep moving 😎","Haha, nope 😅"
+];
+
+// Music elements
+let mainSong, yesSong;
+
+// Play first song after user click
+document.getElementById("musicBtn").addEventListener("click",()=>{
+    if(!mainSong){
+        mainSong = document.createElement("iframe");
+        mainSong.width = 0;
+        mainSong.height = 0;
+        mainSong.src = "https://www.youtube.com/embed/K_zylJH4PRI?autoplay=1&loop=1&playlist=K_zylJH4PRI";
+        mainSong.style.display="none";
+        document.body.appendChild(mainSong);
+        document.getElementById("musicBtn").innerText="Playing... ❤️";
+    }
+});
+
+// No button logic
+noBtn.addEventListener("mouseover", () => {
+  escapeCount++;
+  noBtn.style.left = Math.random()*(window.innerWidth-120)+"px";
+  noBtn.style.top = Math.random()*(window.innerHeight-120)+"px";
+  noBtn.style.transform = "rotate("+ (Math.random()*20-10) +"deg)";
+  if(escapeCount<=noTexts.length) noBtn.textContent=noTexts[escapeCount-1];
+  else { noBtn.textContent="Can't click me 😆"; noBtn.style.transform=`scale(${Math.max(0.1,1-(escapeCount-noTexts.length)*0.05)})`; }
+});
+noBtn.addEventListener("click", () => { alert("Nice try 😏 Keep going! ❤️"); });
+
+// Floating hearts
+setInterval(()=>{
+  let h=document.createElement("div"); h.className="heart"; h.innerHTML="❤️";
+  h.style.left=Math.random()*window.innerWidth+"px";
+  h.style.fontSize=(20+Math.random()*30)+"px";
+  document.body.appendChild(h); setTimeout(()=>h.remove(),5000);
+},700);
+
+// Cursor-following hearts
+document.addEventListener("mousemove",(e)=>{
+  let c=document.createElement("div"); c.className="cursor-heart"; c.innerHTML="💖";
+  c.style.left=e.pageX+"px"; c.style.top=e.pageY+"px";
+  document.body.appendChild(c); setTimeout(()=>c.remove(),2000);
+});
+
+// Yes button logic
+document.getElementById("yesBtn").addEventListener("click",()=>{
+    // Play Yes song
+    if(!yesSong){
+        yesSong = document.createElement("iframe");
+        yesSong.width=0; yesSong.height=0;
+        yesSong.src="https://www.youtube.com/embed/MyxxMxKKpA8?autoplay=1&loop=1&playlist=MyxxMxKKpA8";
+        yesSong.style.display="none";
+        document.body.appendChild(yesSong);
+    }
+
+    document.body.innerHTML=`
+      <div class="big-heart">💖</div>
+      <h1 style="font-size:50px;">She said YES! ❤️🥰</h1>
+      <div class="gilbert">— Gilbert</div>
+      <button id="musicBtn">Play Special Song 🎵</button>
+    `;
+
+    // 20 heart & sparkle animations
+    const heartAnimations=[()=>createHeart("❤️"),()=>createHeart("💖"),()=>createHeart("💗"),()=>createHeart("💘")];
+    const sparkleAnimations=[()=>createSparkle(),()=>createSparkle(),()=>createSparkle()];
+    const textMessages=["You are my everything ❤️","My heart beats for you 💓","Forever yours 💞","You complete me 💖","Love you endlessly 💕"];
+
+    for(let i=0;i<20;i++){
+      setTimeout(()=>{
+        heartAnimations[Math.floor(Math.random()*heartAnimations.length)]();
+        sparkleAnimations[Math.floor(Math.random()*sparkleAnimations.length)]();
+        let msg=document.createElement("h2");
+        msg.innerText=textMessages[Math.floor(Math.random()*textMessages.length)];
+        msg.style.position="fixed";
+        msg.style.top=Math.random()*60+"%";
+        msg.style.left=Math.random()*60+"%";
+        msg.style.fontSize=(20+Math.random()*20)+"px";
+        msg.style.color="#ff3366"; msg.style.opacity="0"; msg.style.animation="fadeIn 2s forwards";
+        document.body.appendChild(msg); setTimeout(()=>msg.remove(),4000);
+      },i*700);
+    }
+
+    // Final message
+    setTimeout(()=>{
+      document.body.innerHTML=`
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;animation:fadeIn 2s;">
+        <h1 style="font-size:60px;color:#ff4da6;text-shadow:0 0 15px #ff99cc,0 0 40px #ff66b3;animation:pulseGlow 2s infinite;">
+          I LOVE YOU, SANDRINE ❤️
+        </h1>
+        <div style="font-size:150px;animation:beatingHeart 2s infinite;margin-top:20px;">💗</div>
+        <h2 style="margin-top:30px;font-size:36px;color:#cc0066;">You are my heart. My happiness. My forever.</h2>
+        <h3 style="margin-top:20px;font-size:32px;color:#ff4da6;font-weight:bold;text-shadow:0 0 10px #ff80bf;animation:glow 2s infinite alternate;">— Forever yours, Gilbert</h3>
+      </div>`;
+      for(let i=0;i<50;i++){ createSparkle(); createHeart("💖"); }
+    },7000);
+});
+
+// Heart and sparkle helpers
+function createHeart(symbol="💖"){ let h=document.createElement("div"); h.className="heart"; h.innerHTML=symbol;
+h.style.left=Math.random()*window.innerWidth+"px"; h.style.fontSize=(20+Math.random()*40)+"px"; document.body.appendChild(h); setTimeout(()=>h.remove(),5000);}
+function createSparkle(){ let s=document.createElement("div"); s.innerHTML="✨"; s.style.position="fixed";
+s.style.left=Math.random()*window.innerWidth+"px"; s.style.top=Math.random()*window.innerHeight+"px";
+s.style.opacity="0"; s.style.animation=`sparkleFade ${2+Math.random()*3}s infinite`; s.style.fontSize=(15+Math.random()*25)+"px"; document.body.appendChild(s);}
+</script>
+</body>
+</html>
