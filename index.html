@@ -163,7 +163,15 @@ let escapeCount = 0;
 let noBtn = document.getElementById("noBtn");
 let bgMusic = document.getElementById("bgMusic");
 
-let noTexts = ["Really? 😳", "Come on… 😅", "Try again 🤭", "Don't lie 😌", "Hmm… 🤨"];
+    let noTexts = [
+    "Really? 😳", "Come on… 😅", "Try again 🤭", "Don't lie 😌", "Hmm… 🤨",
+    "Not this time 😏", "Oops! 😬", "You can't! 😜", "Haha, nice try 😝", "Again? 🤔",
+    "Nope! 🙃", "Keep trying 😎", "Almost… 😇", "Not yet 😶", "Think again 🤪",
+    "Wrong choice 😣", "Not allowed 😆", "Try harder 😅", "Haha 😂", "Impossible 😱",
+    "Fail 😬", "Nice try 😏", "You wish 😌", "LOL 😝", "Come back later 😛",
+    "No way 🤭", "Not happening 😜", "Hahaha 😆", "Keep moving 😎", "Haha, nope 😅"
+];
+
 
 /* Hearts floating */
 setInterval(() => {
@@ -185,11 +193,11 @@ noBtn.addEventListener("mouseover", () => {
 
     noBtn.style.transform = "rotate(" + (Math.random() * 20 - 10) + "deg)";
 
-    if (escapeCount > 5 && escapeCount < 10) {
+    if (escapeCount > 1 && escapeCount < 31) {
         noBtn.textContent = noTexts[Math.floor(Math.random() * noTexts.length)];
     }
 
-    if (escapeCount >= 10) {
+    if (escapeCount >= 31) {
         let scale = Math.max(0.1, 1 - (escapeCount - 10) * 0.1);
         noBtn.style.transform = `scale(${scale})`;
         noBtn.textContent = "Can't click me 😆";
