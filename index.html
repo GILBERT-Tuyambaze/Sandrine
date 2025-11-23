@@ -69,14 +69,14 @@ document.getElementById("musicBtn").addEventListener("click",()=>{
 
 // No button logic
 noBtn.addEventListener("mouseover", () => {
-  int x = 0;
+  escapeCount++;
   noBtn.style.left = Math.random()*(window.innerWidth-120)+"px";
   noBtn.style.top = Math.random()*(window.innerHeight-120)+"px";
   noBtn.style.transform = "rotate("+ (Math.random()*20-10) +"deg)";
-  if(x<=noTexts.length) noBtn.textContent=noTexts[x];
+  if(escapeCount<=noTexts.length) noBtn.textContent=noTexts[escapeCount];
   else { noBtn.textContent="Can't click me 😆"; noBtn.style.transform=`scale(${Math.max(0.1,1-(escapeCount-noTexts.length)*0.05)})`; }
 });
-  x++:
+  
 noBtn.addEventListener("click", () => { alert("Nice try 😏 Keep going! ❤️"); });
 
 // Floating hearts
