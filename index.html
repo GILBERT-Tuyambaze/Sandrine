@@ -134,18 +134,47 @@ document.getElementById("yesBtn").addEventListener("click",()=>{
 
     // Final message
     setTimeout(()=>{
-      document.body.innerHTML=`
-      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;animation:fadeIn 2s;">
-        <h1 style="font-size:60px;color:#ff4da6;text-shadow:0 0 15px #ff99cc,0 0 40px #ff66b3;animation:pulseGlow 2s infinite;">
-          I LOVE YOU, SANDRINE ❤️
-        </h1>
-        <div style="font-size:150px;animation:beatingHeart 2s infinite;margin-top:20px;">💗</div>
-        <h2 style="margin-top:30px;font-size:36px;color:#cc0066;">You are my heart. My happiness. My forever.</h2>
-        <h3 style="margin-top:20px;font-size:32px;color:#ff4da6;font-weight:bold;text-shadow:0 0 10px #ff80bf;animation:glow 2s infinite alternate;">— Forever yours, Gilbert</h3>
-      </div>`;
-      for(let i=0;i<50;i++){ createSparkle(); createHeart("💖"); }
-    },7000);
-});
+  document.body.innerHTML=`
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;animation:fadeIn 2s;">
+    
+    <h1 style="font-size:60px;color:#ff4da6;text-shadow:0 0 15px #ff99cc,0 0 40px #ff66b3;animation:pulseGlow 2s infinite;">
+      I LOVE YOU, SANDRINE ❤️
+    </h1>
+
+    <div style="font-size:150px;animation:beatingHeart 2s infinite;margin-top:20px;">💗</div>
+
+    <h2 style="margin-top:30px;font-size:36px;color:#cc0066;">
+      You are my heart. My happiness. My forever.
+    </h2>
+
+    <h3 style="margin-top:20px;font-size:32px;color:#ff4da6;font-weight:bold;text-shadow:0 0 10px #ff80bf;animation:glow 2s infinite alternate;">
+      — Forever yours, Gilbert
+    </h3>
+
+    <!-- ⭐ Valentine Page Link Button -->
+    <a href="valentine.html">
+      <button style="
+        margin-top:40px;
+        padding:18px 35px;
+        font-size:24px;
+        border:none;
+        border-radius:15px;
+        background:linear-gradient(45deg,#ff4da6,#ff99cc);
+        color:white;
+        cursor:pointer;
+        animation:pulse 1.5s infinite;
+        box-shadow:0 0 15px #ff66b3;
+      ">
+        💝 Open Your Special Valentine Surprise 💝
+      </button>
+    </a>
+
+  </div>
+  `;
+
+  for(let i=0;i<50;i++){ createSparkle(); createHeart("💖"); }
+
+},7000);
 
 // Heart and sparkle helpers
 function createHeart(symbol="💖"){ let h=document.createElement("div"); h.className="heart"; h.innerHTML=symbol;
